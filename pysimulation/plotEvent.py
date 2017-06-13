@@ -14,5 +14,5 @@ if len(sys.argv) == 5 :
     p = Plotter.Plotter (wavelet_name, nbevent, fact, cam_name)
     p.plot_all()
 else :
-    print (">>> Enter : wavelet_name event_number fact(s/n) cam_name")
+    print ("argv :\n\twavelet_name event_number fact(s/n) cam_name")
     exit()

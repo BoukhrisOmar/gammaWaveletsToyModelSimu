@@ -17,4 +17,4 @@ elif len(sys.argv) >= 4 :
     #histplotter.print_eps()
     histplotter.plot_all()
 else :
-    print ("argv :\n\t[*] cam_name wavelet_name\n\t[*] cam_name factSignalNoise wavelet_list")
+    print ("argv :\n\t cam_name wavelet_name\n\t[*] cam_name factSignalNoise wavelet_list")

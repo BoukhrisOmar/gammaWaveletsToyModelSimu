@@ -10,4 +10,4 @@ if len(sys.argv) >= 3 :
     hillasErrPlot = PlotHillasParamErr.PlotHillasParamErr (wave_list, fact, cam_name)
     hillasErrPlot.plot_all()
 else :
-    print ("Please enter : cam_name and wavelets list as arguments")
+    print ("argv :\n\tcam_name and wavelets list as arguments")

@@ -3,13 +3,6 @@ import sys, os
 import scripts.MatrixFileSystem as MatrixFileSystem
 import scripts.MyProgressBar as MyProgressBar
 
-"""
-cleaning command :
-    python file.py wavelet_name nbEventToClean fact pathToEvents
-event generator command :
-    python generate_events.py nbEvent data/image data/signal data/noise fact wavelet
-"""
-
 help_msg = "usage\n\tpython file.py wavelet_name --nei|notnei nbEventToClean fact cam_name pathToEvents"
 
 if len(sys.argv) == 7 :
