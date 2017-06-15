@@ -6,10 +6,8 @@ import scripts.ErrorCalc as ErrorCalc
 from math import pi
 
 def fmod (x, y) :
-    while x <= -y : x += y
-    while x >= y : x -= y
-    return x
-
+    #redefinir le fmod (*100000 % pi/2 )/100000
+    return float(int(x*1000000) % int(y*1000000))/1000000.0
 
 class HillasData (HillasValidation.HillasValidation) :
 

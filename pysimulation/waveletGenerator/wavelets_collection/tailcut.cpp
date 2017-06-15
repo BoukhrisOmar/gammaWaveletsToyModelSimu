@@ -22,6 +22,7 @@ void Tailcut::greedyCleaningWithNeighbours (std::vector<float> & keepSignalRectO
 	//* auto calc threshold
 	bool cond, cond2;
 	size_t shift;
+	std::vector<float> res = std::vector<float> (nbRow*nbCol, 0.0f) ;
 	for(size_t i(1lu); i < nbRow - 1lu; ++i){
 		for(size_t j(1lu); j < nbCol - 1lu; ++j){
 			shift = i*nbCol + j;
@@ -40,27 +41,22 @@ void Tailcut::greedyCleaningWithNeighbours (std::vector<float> & keepSignalRectO
 					(signalRectIn[(i+1)*nbCol + j] >= this->p_thresholdCenter) ||
 					(signalRectIn[(i+1)*nbCol + j+1] >= this->p_thresholdCenter) ||
 					(signalRectIn[(i)*nbCol + j+1] >= this->p_thresholdCenter)));
-			keepSignalRectOut[i*nbCol + j] = (cond || cond2) ? signalRectIn[i*nbCol + j] : 0.0f ;
+			//keepSignalRectOut[i*nbCol + j] = (cond || cond2) ? signalRectIn[i*nbCol + j] : 0.0f ;
+			float my_bool = (cond||cond2) ;
+			res[(i)*nbCol + j] = my_bool || res[(i)*nbCol + j] ;
+			res[(i-1)*nbCol + j] = my_bool || res[(i-1)*nbCol + j] ;
+			res[(i-1)*nbCol + j-1] = my_bool || res[(i-1)*nbCol + j-1] ;
+			res[(i)*nbCol + j-1] = my_bool || res[(i)*nbCol + j-1] ;
+			res[(i+1)*nbCol + j] = my_bool || res[(i+1)*nbCol + j] ;
+			res[(i+1)*nbCol + j+1] = my_bool || res[(i+1)*nbCol + j+1] ;
+			res[(i)*nbCol + j+1] = my_bool || res[(i)*nbCol + j+1] ;
 		}
 	}
-	//* neighbours
-	std::vector<float> res = keepSignalRectOut ;
-	float my_bool ;
-	for(size_t i(1lu); i < nbRow - 1lu; ++i){
-		for(size_t j(1lu); j < nbCol - 1lu; ++j){
-			my_bool = (keepSignalRectOut[i*nbCol + j] != 0.0f) ;
-			res[(i-1)*nbCol + j] = my_bool ;
-			res[(i-1)*nbCol + j-1] = my_bool ;
-			res[(i)*nbCol + j-1] = my_bool ;
-			res[(i+1)*nbCol + j] = my_bool ;
-			res[(i+1)*nbCol + j+1] = my_bool ;
-			res[(i)*nbCol + j+1] = my_bool ;
-		}
-	} //*/
+	keepSignalRectOut = res ;
 	//* image reconstruction from mask
 	for (size_t i(1lu); i < nbRow-1; i++){
 		for (size_t j(1lu); j < nbCol-1 ; j++) {
-			if (keepSignalRectOut[i*nbCol+j] != 0.0f || res[i*nbCol+j] != 0.0f)
+			if (keepSignalRectOut[i*nbCol+j] != 0.0f)
 					keepSignalRectOut[i*nbCol+j] = signalRectIn[i*nbCol+j] ;
 		}
 	} //*/

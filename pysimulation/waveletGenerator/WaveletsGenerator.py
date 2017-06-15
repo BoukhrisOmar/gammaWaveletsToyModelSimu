@@ -80,7 +80,7 @@ class WaveletGenerator:
         cpp_src += "}\n"
         return cpp_src
 
-    def __get_cleaning_mask (self, neighbours=False) :
+    def __get_cleaning_mask (self, neighbours=False, quad=False) :
         cpp_src  = "\t//getting the mask\n"
         cpp_src += "\tstd::vector<float> res = std::vector<float>(nbRow*nbCol, 0.0f) ;\n"
         cpp_src += "\tfor (size_t i (1lu) ; i < nbRow -1 ; i++) {\n"
@@ -228,7 +228,7 @@ class CompilingScript :
         os.system("chmod +x compile.sh")
 
 if __name__ == "__main__" :
-    t = ["myWave6", "test6", "walsh", "test6_2"]
+    t = ["myWave6", "walsh"]
     for i in t :
         wg = WaveletGenerator(i)
         wg.write_sourceCode_to_file()

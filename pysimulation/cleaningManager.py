@@ -3,7 +3,7 @@ import sys, os
 import scripts.MatrixFileSystem as MatrixFileSystem
 import scripts.MyProgressBar as MyProgressBar
 
-help_msg = "usage\n\tpython file.py wavelet_name --nei|notnei nbEventToClean fact cam_name pathToEvents"
+help_msg = "argv:\n\twavelet_name --nei|notnei nbEventToClean fact cam_name pathToEvents"
 
 if len(sys.argv) == 7 :
     wavelet_name = sys.argv[1]

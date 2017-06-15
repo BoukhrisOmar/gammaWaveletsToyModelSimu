@@ -43,9 +43,10 @@ class PyGammaSimulation (Transforms) :
             length, width = random.uniform(self.length[0], self.length[1]),  random.uniform(self.width[0], self.width[1])
             psi = str(random.randint(self.psi[0], self.psi[1])) + "d"
             nsb = random.randint(self.nsb[0], self.nsb[1])
+            #nsb = random.randint(int(self.nsb[0]*(1-sn**2)), int(self.nsb[1]*(1-sn**2)))
 
             showermodel = toy.generate_2d_shower_model(centroid=centroid, length=length,width=width, psi=psi)
-            image, signal, noise = toy.make_toymodel_shower_image(self.geom, showermodel.pdf, intensity=3, nsb_level_pe=nsb)
+            image, signal, noise = toy.make_toymodel_shower_image(self.geom, showermodel.pdf, intensity=int(3*(1+sn**2)), nsb_level_pe=nsb)
             ks = []
             for s in signal :
                 if s != 0. :
